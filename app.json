@@ -1,0 +1,62 @@
+{
+    "id": "nl.ihoog.example3",
+    "name": {
+        "en": "Homey Example 3 app",
+		"nl": "Homey Voorbeeld 3 app"
+    },
+    "category": ["internet","tools"],
+    "version": "0.0.2",
+    "compatibility": "0.x || 1.x",
+    "author": {
+        "name": "Florus Hoogendoorn",
+        "website": "http://www.flomotica.nl",
+        "email": "florus@ihoog.nl",
+		"github": "https://github.com/florushoogendoorn/nl.ihoog.example3"
+    },
+    "description": {
+        "en": "Example app for Homey",
+        "nl": "Voorbeeld app voor Homey"
+    },    
+    "permissions": [
+        "homey:manager:speech-input",
+        "homey:manager:speech-output",
+		"homey:manager:ledring"
+    ],
+    "speech": [
+        {
+            "id": "temperature",
+            "importance": 0.4,
+            "triggers": {
+                "en": [ "temperature" ],
+                "nl": [ "temperatuur" ]
+            }
+        },
+        {
+            "id": "garden",
+            "importance": 0.6,
+            "triggers": {
+                "en": [ "garden", "get" ],
+                "nl": [ "tuin", "wat" ]
+            }
+        },
+        {
+            "id": "sensor",
+            "importance": 0.4,
+            "triggers": {
+                "en": [ "sensor", "sensors"],
+                "nl": [ "sensor", "sensoren"]
+            }
+        }
+    ],
+    "flow": {
+        "actions": [
+            {
+                "id": "tell_garden_temp",
+                "title": {
+                    "en": "Temperature garden",
+                    "nl": "Temperatuur in tuin"
+                }
+            }
+        ]
+    }
+}
