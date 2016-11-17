@@ -27,8 +27,8 @@ function getGardenTemp() {
             .on('end', function()
             {
                 body = JSON.parse(body);
-				var message = __("temperature") + body.facts[0] + __("humidity") + body.facts[1] + __("end");
-				console.log(message);
+		var message = __("temperature") + body.temperatuur + __("humidity") + body.vochtigheid + __("end");
+		console.log(message);
                 Homey.manager('speech-output').say( message );
             });
             
