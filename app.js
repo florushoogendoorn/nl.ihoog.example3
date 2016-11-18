@@ -37,10 +37,22 @@ function getGardenTemp() {
 		var res1 = c.substring(0, c.length-1);
 		var res2 = p.substring(0, p.length-1);
 		
-		
-		var start_time = body.meettijd;
-		var start_date = body.meetdatum;
+		var minutes = getMinutesAgo(body.meettijd, body.meetdatum);
 
+		var message = __("temperature") + res1 + __("humidity") + res2 + __("timeago") + minutes + __("end");
+		console.log(message);
+                Homey.manager('speech-output').say( message );
+            });
+            
+    }).on('error', function(e)
+    {
+        console.log("Got error: " + e.message);
+        Homey.manager('speech-output').say('No internet connection');
+    });
+}
+
+function getMinutesAgo(start_time, start_date) {
+	
 		var start_hour = start_time.slice(0, -3);
 		var start_minutes = start_time.slice(-2);
 		var start_year = start_date.slice(-4);
@@ -53,14 +65,6 @@ function getGardenTemp() {
 		var millis = endDate - startDate;
 		var minutes = millis/1000/60;
 
-		var message = __("temperature") + res1 + __("humidity") + res2 + __("timeago") + minutes + __("end");
-		console.log(message);
-                Homey.manager('speech-output').say( message );
-            });
-            
-    }).on('error', function(e)
-    {
-        console.log("Got error: " + e.message);
-        Homey.manager('speech-output').say('No internet connection');
-    });
+	return minutes;
+
 }
