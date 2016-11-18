@@ -60,7 +60,8 @@ function getMinutesAgo(start_time, start_date) {
 		var start_day = start_date.slice(0, 2);
 
 		var startDate = new Date(start_year, start_month, start_day, start_hour, start_minutes);
-		var endDate = new Date();
+		// var endDate = new Date();
+		var endDate = Date.now();
 
 		var millis = endDate - startDate;
 		var minutes = millis/1000/60;
