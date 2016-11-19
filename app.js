@@ -39,10 +39,17 @@ function getGardenTemp() {
 		
 		var minutes = getMinutesAgo(body.meettijd, body.meetdatum);
 
-		var message = __("temperature") + res1 + __("humidity") + res2 + __("timeago") + minutes + __("end");
+		var message = __("temperature") + res1 + __("humidity") + res2 + __("timeago");
+		
+		if (minutes < 2) {
+			message = message + __("stop");
+		} else {
+			message = message + minutes + __("end");
+		}
+
 		console.log(message);
-                Homey.manager('speech-output').say( message );
-            });
+        Homey.manager('speech-output').say( message );
+    });
             
     }).on('error', function(e)
     {
@@ -55,16 +62,25 @@ function getMinutesAgo(start_time, start_date) {
 	
 		var start_hour = start_time.slice(0, -3);
 		var start_minutes = start_time.slice(-2);
+		
 		var start_year = start_date.slice(-4);
-		var start_month = start_date.slice(3, 2);
+		
+		var start_maand = start_date.slice(-7);
+		start_maand = start_maand.slice(0, 2);
+		start_maand = start_maand - 1;
+		
+		var start_month = start_maand;
+		
 		var start_day = start_date.slice(0, 2);
-
+		
 		var startDate = new Date(start_year, start_month, start_day, start_hour, start_minutes);
-		// var endDate = new Date();
 		var endDate = Date.now();
+		
+		console.log("startDate: " + startDate);
+		console.log("endDate: " + endDate);
 
 		var millis = endDate - startDate;
-		var minutes = millis/1000/60;
+		var minutes = Math.round(millis/1000/60);
 
 	return minutes;
 

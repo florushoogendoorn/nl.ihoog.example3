@@ -2,5 +2,6 @@
 	"temperature": "The temperatuur into the garden is ",
 	"humidity": " Celsius degrees and the humidity is ",
 	"timeago": " percent. Measured ",
-	"end": " minutes ago."
+	"end": " minutes ago.",
+	"stop": " just done."
 }

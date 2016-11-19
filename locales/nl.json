@@ -2,5 +2,6 @@
 	"temperature": "De temperatuur in de tuin is ",
 	"humidity": " graden Celsius en de vochtigheid is ",
 	"timeago": " procent. Meting van ",
-	"end": " minuten geleden."
+	"end": " minuten geleden.",
+	"stop": " zojuist."
 }
