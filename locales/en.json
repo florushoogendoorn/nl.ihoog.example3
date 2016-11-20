@@ -3,5 +3,6 @@
 	"humidity": " Celsius degrees and the humidity is ",
 	"timeago": " percent. Measured ",
 	"end": " minutes ago.",
-	"stop": " just done."
+	"stop": " just done.",
+	"NoResult": "Sorry, The sensor didn't sent results for a while."
 }

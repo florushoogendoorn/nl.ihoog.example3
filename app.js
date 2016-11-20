@@ -14,10 +14,12 @@ Homey.manager('flow').on('action.tell_garden_temp', function( callback, args ) {
 });
 
 function getGardenTemp() {
-    http.get('http://jezietheternietaanaf.nl/sensorapi.php?sensor=NL5032EK05_01', function(res) {
-        var body = '';
 
-		// {"temperatuur":"10.20","vochtigheid":"99.90","meetdatum":"17-11-2016","meettijd":"11:23","msg":"Tuin-terras"}
+	var apiurl = Homey.manager('settings').get( 'apiurl' );
+	var code1 = Homey.manager('settings').get( 'code1' );
+
+    http.get(apiurl + code1, function(res) {
+        var body = '';
 		
         res
             .on('data', function(chunk)
@@ -41,10 +43,16 @@ function getGardenTemp() {
 
 		var message = __("temperature") + res1 + __("humidity") + res2 + __("timeago");
 		
-		if (minutes < 2) {
-			message = message + __("stop");
+
+		var NoResult = res1.slice(0,2);
+		if (NoResult == "--") {
+			message = __("NoResult");
 		} else {
-			message = message + minutes + __("end");
+			if (minutes < 2) {
+				message = message + __("stop");
+			} else {
+				message = message + minutes + __("end");
+			}
 		}
 
 		console.log(message);
@@ -80,7 +88,7 @@ function getMinutesAgo(start_time, start_date) {
 		console.log("endDate: " + endDate);
 
 		var millis = endDate - startDate;
-		var minutes = Math.round(millis/1000/60);
+		var minutes = Math.round(millis/1000/60)+60;
 
 	return minutes;
 

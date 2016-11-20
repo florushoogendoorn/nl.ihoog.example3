@@ -3,5 +3,6 @@
 	"humidity": " graden Celsius en de vochtigheid is ",
 	"timeago": " procent. Meting van ",
 	"end": " minuten geleden.",
-	"stop": " zojuist."
+	"stop": " zojuist.",
+	"NoResult": "Excuses, de sensor in de tuin heeft zich al even niet laten horen."
 }

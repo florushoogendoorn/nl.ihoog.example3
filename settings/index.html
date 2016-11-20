@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+    <head>
+
+    </head>
+    <body>
+
+        <h1>Homey Voorbeeld 3 app</h1>
+        <p>Hier kunnen de sensors worden ingegeven, meer informatie over dit project is terug te vinden op <a href="http://www.flomotica.nl">www.flomotica.nl</a>.</p>
+
+        <div class="field row">
+            <label for="apiurl">API url:</label>
+            <input id="apiurl" type="text" value="" />
+        </div>
+
+        <fieldset>
+            <legend>Sensor 1</legend>
+            <div class="field row">
+                <label for="code1">Sensor code:</label>
+                <input id="code1" type="text" value="" />
+            </div>
+
+            <div class="field row">
+                <label for="name1">Sensor naam:</label>
+                <input id="name1" type="text" value="" />
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Sensor 2</legend>
+            <div class="field row">
+                <label for="code2">Sensor code:</label>
+                <input id="code2" type="text" value="" />
+            </div>
+
+            <div class="field row">
+                <label for="name2">Sensor naam:</label>
+                <input id="name2" type="text" value="" />
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Sensor 3</legend>
+            <div class="field row">
+                <label for="code3">Sensor code:</label>
+                <input id="code3" type="text" value="" />
+            </div>
+
+            <div class="field row">
+                <label for="name3">Sensor naam:</label>
+                <input id="name3" type="text" value="" />
+            </div>
+        </fieldset>
+
+        <button class="right" onclick="save()">Instellingen opslaan</button>
+
+        <script type="text/javascript">
+        function onHomeyReady(){
+            var code1 = '';
+            var name1 = '';
+			var apiurl = '';
+			
+            Homey.get('code1', function(err, code1) {
+				console.log(code1);
+				document.getElementById('code1').value = code1;
+            });
+
+            Homey.get('name1', function(err, name1) {
+				console.log(name1);
+				document.getElementById('name1').value = name1;
+            });
+            
+            Homey.get('apiurl', function(err, apiurl) {
+				console.log(apiurl);
+				document.getElementById('apiurl').value = apiurl;
+            });
+            
+            Homey.ready();
+        }
+
+        function save() {
+            Homey.set('code1',document.getElementById('code1').value);
+           console.log("Code set: "+document.getElementById('code1').value);
+           
+           Homey.set('name1',document.getElementById('name1').value);
+           Homey.set('apiurl',document.getElementById('apiurl').value);
+        }
+        </script>
+
+    </body>
+</html>
