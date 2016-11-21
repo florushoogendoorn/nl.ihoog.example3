@@ -49,6 +49,35 @@
         }
     ],
     "flow": {
+	    "triggers": [
+    	    {
+        	    "id": "freeze_start",
+            	"title": {
+	                "en": "It starts freezing",
+	                "nl": "Het begint te vriezen"
+    	        },
+	            "tokens": [
+    	            {
+        	            "name": "degrees_act",
+            	        "title": {
+                	        "en": "Celsius",
+                	        "nl": "Celsius"
+                    	},
+	                    "example": {
+    	                    "en": "0",
+    	                    "nl": "0"
+        	            }
+            	    }
+	            ]    	        
+        	},
+	        {
+    	        "id": "freeze_stop",
+        	    "title": {
+            	    "en": "It stops freezing",
+            	    "nl": "De dooi zet in"
+	            }
+    	    }
+	    ],
         "actions": [
             {
                 "id": "tell_garden_temp",

@@ -3,15 +3,21 @@
 var http = require('http');
 
 module.exports.init = function() {
+
+	setInterval(getGardenTemp, 3 * 60 * 60 * 1000);
+
     Homey.manager('speech-input').on('speech', function(speech, callback) {
         getGardenTemp();
     });   
+    
 }
+
 
 Homey.manager('flow').on('action.tell_garden_temp', function( callback, args ) {
     getGardenTemp();      
     callback( null, true );
 });
+
 
 function getGardenTemp() {
 
@@ -88,7 +94,7 @@ function getMinutesAgo(start_time, start_date) {
 		console.log("endDate: " + endDate);
 
 		var millis = endDate - startDate;
-		var minutes = Math.round(millis/1000/60)+60;
+		var minutes = Math.round(millis/1000/60)+0;
 
 	return minutes;
 
