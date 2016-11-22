@@ -4,7 +4,7 @@ var http = require('http');
 
 module.exports.init = function() {
 
-	setInterval(getGardenTemp, 3 * 60 * 60 * 1000);
+    setInterval(SaveTemp('code1'), 10 * 60 * 1000);
 
     Homey.manager('speech-input').on('speech', function(speech, callback) {
         getGardenTemp();
@@ -17,6 +17,47 @@ Homey.manager('flow').on('action.tell_garden_temp', function( callback, args ) {
     getGardenTemp();      
     callback( null, true );
 });
+
+
+function SaveTemp(sensorNo) {
+
+	var apiurl = Homey.manager('settings').get( 'apiurl' );
+	var codeSens = Homey.manager('settings').get( sensorNo );
+
+	http.get(apiurl + codeSens, function(res) {
+        var body = '';
+		
+        res
+            .on('data', function(chunk)
+            {
+                body += chunk;
+            })
+            .on('end', function()
+            {
+                body = JSON.parse(body);
+		var t = body.temperatuur;
+		var h = body.vochtigheid;
+				
+		Homey.manager('insights').createLog( 'sensor1_measure', {
+    		label: {
+        		en: 'Temperature',
+			nl: "Temperatuur'
+    		},
+    		type: 'number',
+    		units: {
+        		en: 'Celsius',
+        		nl: 'Celsius'
+    		},
+    		decimals: 2,
+    		chart: 'stepLine' 
+	    }, function callback(err , success){
+    		if( err ) return console.error(err);
+    		Homey.manager('insights').createEntry( 'sensor1_measure', t, new Date(), function(err, success){
+        		if( err ) return console.error(err);
+    		})
+	    });
+	}
+}
 
 
 function getGardenTemp() {
