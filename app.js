@@ -41,7 +41,7 @@ function SaveTemp(sensorNo) {
 		Homey.manager('insights').createLog( 'sensor1_measure', {
     		label: {
         		en: 'Temperature',
-			nl: "Temperatuur'
+			nl: 'Temperatuur'
     		},
     		type: 'number',
     		units: {
