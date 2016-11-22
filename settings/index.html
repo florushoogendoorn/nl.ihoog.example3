@@ -8,21 +8,28 @@
         <h1>Homey Voorbeeld 3 app</h1>
         <p>Hier kunnen de sensors worden ingegeven, meer informatie over dit project is terug te vinden op <a href="http://www.flomotica.nl">www.flomotica.nl</a>.</p>
 
-        <div class="field row">
-            <label for="apiurl">API url:</label>
-            <input id="apiurl" type="text" value="" />
-        </div>
+        <fieldset>
+            <legend>Algemeen</legend>
+			<div class="field row">
+				<label for="apiurl">API url:</label>
+				<input id="apiurl" type="text" value="" size=50 />
+			</div>
+			<div class="field row">
+				<label for="apirefresh">Log frequentie (minuten):</label>
+				<input id="apirefresh" type="text" value="" size=5 /> [0 = Uit]		
+			</div>
+        </fieldset>
 
         <fieldset>
             <legend>Sensor 1</legend>
             <div class="field row">
                 <label for="code1">Sensor code:</label>
-                <input id="code1" type="text" value="" />
+                <input id="code1" type="text" value="" size=10 />
             </div>
 
             <div class="field row">
                 <label for="name1">Sensor naam:</label>
-                <input id="name1" type="text" value="" />
+                <input id="name1" type="text" value="" size=20 />
             </div>
         </fieldset>
 
@@ -30,12 +37,12 @@
             <legend>Sensor 2</legend>
             <div class="field row">
                 <label for="code2">Sensor code:</label>
-                <input id="code2" type="text" value="" />
+                <input id="code2" type="text" value="" size=10 />
             </div>
 
             <div class="field row">
                 <label for="name2">Sensor naam:</label>
-                <input id="name2" type="text" value="" />
+                <input id="name2" type="text" value="" size=20 />
             </div>
         </fieldset>
 
@@ -43,12 +50,12 @@
             <legend>Sensor 3</legend>
             <div class="field row">
                 <label for="code3">Sensor code:</label>
-                <input id="code3" type="text" value="" />
+                <input id="code3" type="text" value="" size=10 />
             </div>
 
             <div class="field row">
                 <label for="name3">Sensor naam:</label>
-                <input id="name3" type="text" value="" />
+                <input id="name3" type="text" value="" size=20 />
             </div>
         </fieldset>
 
@@ -58,32 +65,59 @@
         function onHomeyReady(){
             var code1 = '';
             var name1 = '';
-			var apiurl = '';
+            var code2 = '';
+            var name2 = '';
+            var code3 = '';
+            var name3 = '';
+		
+	    var apiurl = '';
+	    var apirefresh = '';
 			
             Homey.get('code1', function(err, code1) {
-				console.log(code1);
 				document.getElementById('code1').value = code1;
             });
 
             Homey.get('name1', function(err, name1) {
-				console.log(name1);
-				document.getElementById('name1').value = name1;
+		document.getElementById('name1').value = name1;
+            });
+		
+            Homey.get('code2', function(err, code2) {
+		document.getElementById('code2').value = code2;
+            });
+
+            Homey.get('name2', function(err, name2) {
+		document.getElementById('name2').value = name2;
+            });
+			
+            Homey.get('code3', function(err, code3) {
+		document.getElementById('code3').value = code3;
+            });
+
+            Homey.get('name3', function(err, name3) {
+		document.getElementById('name3').value = name3;
             });
             
             Homey.get('apiurl', function(err, apiurl) {
-				console.log(apiurl);
-				document.getElementById('apiurl').value = apiurl;
+		document.getElementById('apiurl').value = apiurl;
+            });
+		
+            Homey.get('apirefresh', function(err, apirefresh) {
+		document.getElementById('apirefresh').value = apirefresh;
             });
             
             Homey.ready();
         }
 
         function save() {
-            Homey.set('code1',document.getElementById('code1').value);
-           console.log("Code set: "+document.getElementById('code1').value);
-           
+           Homey.set('code1',document.getElementById('code1').value);
            Homey.set('name1',document.getElementById('name1').value);
-           Homey.set('apiurl',document.getElementById('apiurl').value);
+           Homey.set('code2',document.getElementById('code2').value);
+           Homey.set('name2',document.getElementById('name2').value);
+           Homey.set('code3',document.getElementById('code3').value);
+           Homey.set('name3',document.getElementById('name3').value);
+
+	   Homey.set('apiurl',document.getElementById('apiurl').value);
+           Homey.set('apirefresh',document.getElementById('apirefresh').value);
         }
         </script>
 
