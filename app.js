@@ -19,7 +19,22 @@ Homey.manager('flow').on('action.tell_garden_temp', function( callback, args ) {
 });
 
 
+function LogTemp(t) {
 
+	Homey.manager('insights').createLog( 'sensor1_measure', {
+	    label: { en: 'Temperatuur' },
+	    type: 'number',
+	    units: { en: '&deg;C' },
+	    decimals: 2,
+	    chart: 'line' 
+	}, function callback(err , success){
+	    if( err ) return console.error(err);
+	    Homey.manager('insights').createEntry( 'sensor1_measure', parseFloat(t), new Date(), function(err, success){
+		if( err ) return console.error(err);
+	    })
+	});
+	
+}
 
 function SaveTemp() {
 
